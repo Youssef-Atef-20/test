@@ -18,9 +18,6 @@ const Home = () => {
     };
 
     useEffect(() => {
-        getUsers()
-
-
         const channel = new BroadcastChannel("users_channel");
 
         channel.onmessage = (event) => {
@@ -32,7 +29,11 @@ const Home = () => {
         return () => {
             channel.close();
         };
-    }, []);
+    }, [])
+
+    useEffect(() => {
+        getUsers()
+    }, [users]);
 
 
 
