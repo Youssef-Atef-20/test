@@ -7,21 +7,34 @@ const Home = () => {
 
     const api = "https://6a95fe44fa33b37f821b05ec.mockapi.io/api/v1/users"
 
-    const channel = new BroadcastChannel("users_channel");
-
-    channel.onmessage = (event) => {
-        if (event.data.type === "USER_ADDED") {
-            getUsers();
-        }
+    const getUsers = () => {
+        axios.get(api)
+            .then((res) => {
+                setUsers(res.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     useEffect(() => {
-        axios.get(api)
-            .then((res) => { setUsers(res.data) })
-            .catch((error) => {
-                console.log(error)
-            })
-    }, [users]);
+        getUsers()
+
+
+        const channel = new BroadcastChannel("users_channel");
+
+        channel.onmessage = (event) => {
+            if (event.data.type === "USER_ADDED") {
+                getUsers();
+            }
+        };
+
+        return () => {
+            channel.close();
+        };
+    }, []);
+
+
 
     return (
         <div className="min-h-screen bg-gray-100 p-8">
