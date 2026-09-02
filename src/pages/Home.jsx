@@ -31,9 +31,7 @@ const Home = () => {
         };
     }, [])
 
-    useEffect(() => {
-        getUsers()
-    }, [users]);
+   
 
 
 
