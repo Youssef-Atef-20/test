@@ -46,12 +46,19 @@ const Form = () => {
 
             alert("Uplaod has been Succesfully")
 
+            const channel = new BroadcastChannel("users_channel");
+
+            channel.postMessage({
+                type: "USER_ADDED"
+            });
+
         } catch (error) {
             console.log(error);
             alert("Uplaod has been Failed")
 
         } finally {
             setLoading(false);
+
         }
     };
 
