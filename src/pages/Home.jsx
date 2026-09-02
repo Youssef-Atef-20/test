@@ -13,7 +13,7 @@ const Home = () => {
     .catch((error) => {
         console.log(error)
     })
-  },[]);
+  },[users]);
 
    return (
     <div className="min-h-screen bg-gray-100 p-8">
