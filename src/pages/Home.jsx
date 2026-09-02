@@ -29,12 +29,17 @@ const Home = () => {
             }
         };
 
+        const interval = setInterval(() => {
+            getUsers();
+        }, 200);
+
         return () => {
+            clearInterval(interval);
             channel.close();
         };
     }, [])
 
-   
+
 
 
 
