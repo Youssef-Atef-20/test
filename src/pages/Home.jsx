@@ -18,6 +18,9 @@ const Home = () => {
     };
 
     useEffect(() => {
+
+        getUsers();
+
         const channel = new BroadcastChannel("users_channel");
 
         channel.onmessage = (event) => {
